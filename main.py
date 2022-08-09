@@ -1,8 +1,9 @@
 import pygame
 import os
+
 pygame.init()
 minecraft_running = os.popen('pgrep -a java | grep "minecraft"')
-#comment out this if you want to remove it checking if minecraft is open. Also make sure to remove the else statement after it
+# comment out the lines that say "pygame.quit()" and "exit()" if you want it to run even if minecraft is open
 if minecraft_running.read() == "":
     print("minecraft not running")
     minecraft_running.close()
@@ -10,8 +11,12 @@ if minecraft_running.read() == "":
     exit()
 else:
     print("minecraft is running")
+
+
 def is_over(rect, pos):
     return True if rect.collidepoint(pos[0], pos[1]) else False
+
+
 minecraft_running.close()
 tab = 1
 cheatname = "Autoclicker"
@@ -47,17 +52,17 @@ while True:
             pygame.quit()
             exit()
         if event.type == pygame.MOUSEBUTTONDOWN:
-            if(is_over(mouseblit, pygame.mouse.get_pos())):
+            if is_over(mouseblit, pygame.mouse.get_pos()):
                 tab = 1
                 cheatname = "Autoclicker"
-            elif (is_over(targetblit, pygame.mouse.get_pos())):
+            elif is_over(targetblit, pygame.mouse.get_pos()):
                 tab = 2
                 cheatname = "Reach"
-            elif (is_over(movementblit, pygame.mouse.get_pos())):
+            elif is_over(movementblit, pygame.mouse.get_pos()):
                 tab = 3
                 cheatname = "Velocity"
-            elif (is_over(cheatsenabledrect, pygame.mouse.get_pos())):
-                if (cheatsenabled[cheatname.lower()]):
+            elif is_over(cheatsenabledrect, pygame.mouse.get_pos()):
+                if cheatsenabled[cheatname.lower()]:
                     cheatsenabled[cheatname.lower()] = False
                 else:
                     cheatsenabled[cheatname.lower()] = True
