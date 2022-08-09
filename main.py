@@ -2,7 +2,7 @@ import pygame
 import os
 pygame.init()
 minecraft_running = os.popen('pgrep -a java | grep "minecraft"')
-# comment out the lines that say "pygame.quit()" and "exit()" if you want it to run even if minecraft is open
+# comment out the lines that say "pygame.quit()" and "exit()" if you want it to run even if minecraft is not open
 if minecraft_running.read() == "":
     print("minecraft not running")
     minecraft_running.close()
