@@ -2,6 +2,7 @@ import pygame
 import os
 pygame.init()
 minecraft_running = os.popen('pgrep -a java | grep "minecraft"')
+#comment out this if you want to remove it checking if minecraft is open. Also make sure to remove the else statement after it
 if minecraft_running.read() == "":
     print("minecraft not running")
     minecraft_running.close()
