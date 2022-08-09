@@ -1,6 +1,5 @@
 import pygame
 import os
-
 pygame.init()
 minecraft_running = os.popen('pgrep -a java | grep "minecraft"')
 # comment out the lines that say "pygame.quit()" and "exit()" if you want it to run even if minecraft is open
@@ -25,6 +24,8 @@ cheatsenabled = {
     "reach": False,
     "velocity": False
 }
+print(list(cheatsenabled)[1])
+accent = (255, 0, 77)
 pygame.display.set_caption('Clever Client')
 Icon = pygame.image.load('logo.png')
 pygame.display.set_icon(Icon)
@@ -34,14 +35,17 @@ font = pygame.font.Font('fonts/Poppins-Regular.ttf', 20)
 mouse = pygame.image.load('mouse-new.png')
 target = pygame.image.load('target.png')
 movement = pygame.image.load('running.png')
+settings = pygame.image.load('gear.png')
 pygame.display.flip()
 while True:
     screen.fill((30, 30, 46))
-    screen.fill((255, 0, 77), (((tab - 1) * 75), 0, ((tab - (tab - 1)) * 75), 85))
+    screen.fill(accent, (((tab - 1) * 75), 0, ((tab - (tab - 1)) * 75), 85))
+    screen.fill((49, 50, 68), (0, 450, 1000, 50))
     mouseblit = screen.blit(pygame.transform.scale(mouse, (75, 75)), (0, 5))
     targetblit = screen.blit(pygame.transform.scale(target, (75, 75)), (75, 5))
     movementblit = screen.blit(pygame.transform.scale(movement, (75, 75)), (150, 5))
-    screen.blit(pygame.transform.scale(Icon, (70, 75)), (930, 5))
+    screen.blit(pygame.transform.scale(Icon, (33, 35)), (5, 457))
+    settingsblit = screen.blit(pygame.transform.scale(settings, (35, 35)), (50, 457))
     cheatnametext = font.render(cheatname, True, (255, 255, 255))
     screen.blit(cheatnametext, (10, 100))
     cheatsenabledtext = font.render("Enabled: " + str(cheatsenabled[cheatname.lower()]).lower(), True, (255, 255, 255))
