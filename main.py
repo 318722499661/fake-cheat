@@ -1,6 +1,29 @@
 import pygame
 import os
+
 pygame.init()
+
+
+def is_over(rect, pos):
+    return True if rect.collidepoint(pos[0], pos[1]) else False
+
+
+class slider:
+    def __init__(self):
+        print("banana")
+        self.width = 255
+        self.posx = 50
+        self.posy = 175
+        value = 0
+
+        def rederSlider():
+            sliderrect = screen.fill((49, 50, 68), (self.posx, self.posy, self.width, 25))
+            screen.fill(accent, (50, 175, value, 25))
+            screen.blit(redtext, (10, 175))
+            numtext = font.render(str(accent[0]), True, (255, 255, 255))
+            screen.blit(numtext, ((self.posx + self.width) + 50, 175))
+
+
 minecraft_running = os.popen('pgrep -a java | grep "minecraft"')
 # comment out the lines that say "pygame.quit()" and "exit()" if you want it to run even if minecraft is not open
 if minecraft_running.read() == "":
@@ -11,11 +34,7 @@ if minecraft_running.read() == "":
 else:
     print("minecraft is running")
 
-
-def is_over(rect, pos):
-    return True if rect.collidepoint(pos[0], pos[1]) else False
-
-
+slider = slider()
 minecraft_running.close()
 tab = 1
 cheatname = "Autoclicker"
@@ -41,15 +60,19 @@ target = pygame.image.load('target.png')
 movement = pygame.image.load('running.png')
 settings = pygame.image.load('gear.png')
 pygame.display.flip()
-redslider = screen.fill((49, 50, 68), (50, 175, 255, 25))
-greenslider = screen.fill((49, 50, 68), (50, 225, 255, 25))
-blueslider = screen.fill((49, 50, 68), (50, 275, 255, 25))
+redslider = screen.fill((49, 50, 68), (50, 175, 256, 25))
+greenslider = screen.fill((49, 50, 68), (50, 225, 256, 25))
+blueslider = screen.fill((49, 50, 68), (50, 275, 256, 25))
+
+
 def rederRedSlider():
     redslider = screen.fill((49, 50, 68), (50, 175, 255, 25))
     screen.fill((accent), (50, 175, accent[0], 25))
     screen.blit(redtext, (10, 175))
     rednumtext = font.render(str(accent[0]), True, (255, 255, 255))
     screen.blit(rednumtext, (325, 175))
+
+
 def renderGreenSlider():
     greenslider = screen.fill((49, 50, 68), (50, 225, 255, 25))
     screen.fill((accent), (50, 225, accent[1], 25))
@@ -57,12 +80,14 @@ def renderGreenSlider():
     greennumtext = font.render(str(accent[1]), True, (255, 255, 255))
     screen.blit(greennumtext, (325, 225))
 
+
 def renderBlueSlider():
     blueslider = screen.fill((49, 50, 68), (50, 275, 255, 25))
     screen.fill((accent), (50, 275, accent[2], 25))
     screen.blit(bluetext, (10, 275))
     bluenumtext = font.render(str(accent[2]), True, (255, 255, 255))
     screen.blit(bluenumtext, (325, 275))
+
 
 while True:
     screen.fill((30, 30, 46))
@@ -79,7 +104,8 @@ while True:
     cheatnametext = font.render(cheatname, True, (255, 255, 255))
     screen.blit(cheatnametext, (10, 100))
     if tab < 4:
-        cheatsenabledtext = font.render("Enabled: " + str(cheatsenabled[cheatname.lower()]).lower(), True, (255, 255, 255))
+        cheatsenabledtext = font.render("Enabled: " + str(cheatsenabled[cheatname.lower()]).lower(), True,
+                                        (255, 255, 255))
         cheatsenabledrect = screen.blit(cheatsenabledtext, (10, 125))
     if tab == 4:
         screen.blit(guicolortext, (10, 125))
