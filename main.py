@@ -32,8 +32,8 @@ minecraft_running = os.popen('pgrep -a java | grep "minecraft"')
 if minecraft_running.read() == "":
     print("minecraft not running")
     minecraft_running.close()
-    #pygame.quit()
-    #exit()
+    pygame.quit()
+    exit()
 else:
     print("minecraft is running")
 
