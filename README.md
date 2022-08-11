@@ -7,3 +7,6 @@ That means on windows it will not launch even if minecraft is open. To fix that 
 
 ## Dependencies
 You will need the pygame python package for it to work
+
+# Screenshots
+<img src="./screnshots/screenshot1.png" alt="screenshot 1">
