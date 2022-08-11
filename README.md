@@ -9,4 +9,4 @@ That means on windows it will not launch even if minecraft is open. To fix that 
 You will need the pygame python package for it to work
 
 # Screenshots
-<img src="./screnshots/screenshot1.png" alt="screenshot 1">
+<img src="https://raw.githubusercontent.com/CloudyWhale/fake-cheat/master/screenshots/screenshot1.png" alt="screenshot 1">
