@@ -17,14 +17,19 @@ class Slider:
         self.steps = 20
         self.slidername = "MinCPS:"
         self.value = 0.0
+        self.roundplaces = 1
 
     def renderSlider(self):
-        self.sliderrect = screen.fill((49, 50, 68), (self.posx, self.posy, self.width, 25))
+        self.sliderrect = screen.fill((30, 30, 46), (self.posx, self.posy, self.width + 1, 25))
+        self.sliderrectrender = screen.fill((49, 50, 68), (self.posx, self.posy, self.width, 25))
         screen.fill(accent, (self.posx, self.posy, self.value / (self.steps / self.width), 25))
         slidernametext = font.render(self.slidername, True, (255, 255, 255))
         screen.blit(slidernametext, (10, self.posy))
         numtext = font.render(str(self.value), True, (255, 255, 255))
         screen.blit(numtext, ((self.posx + self.width) + 25, self.posy))
+
+    def setValue(self):
+            self.value = round((pygame.mouse.get_pos()[0] - self.posx) * (self.steps / self.width), self.roundplaces)
 
 
 minecraft_running = os.popen('pgrep -a java | grep "minecraft"')
@@ -73,6 +78,12 @@ maxcps = Slider()
 maxcps.posx = 100
 maxcps.posy = 225
 maxcps.slidername = "MaxCPS:"
+clickerjitter = Slider()
+clickerjitter.posx = 100
+clickerjitter.posy = 275
+clickerjitter.slidername = "Jitter:"
+clickerjitter.steps = 3
+clickerjitter.roundplaces = 1
 def rederRedSlider():
     redslider = screen.fill((49, 50, 68), (50, 175, 255, 25))
     screen.fill((accent), (50, 175, accent[0], 25))
@@ -119,6 +130,7 @@ while True:
     if tab == 1:
         mincps.renderSlider()
         maxcps.renderSlider()
+        clickerjitter.renderSlider()
     elif tab == 4:
         screen.blit(guicolortext, (10, 125))
         rederRedSlider()
@@ -126,10 +138,12 @@ while True:
         renderBlueSlider()
     if pygame.mouse.get_pressed()[0]:
         if is_over(mincps.sliderrect, pygame.mouse.get_pos()) and tab == 1:
-            mincps.value = round((pygame.mouse.get_pos()[0] - mincps.posx) * (mincps.steps / mincps.width), 2)
+            mincps.setValue()
 
         if is_over(maxcps.sliderrect, pygame.mouse.get_pos()) and tab == 1:
-            maxcps.value = round((pygame.mouse.get_pos()[0] - maxcps.posx) * (maxcps.steps / maxcps.width), 2)
+            maxcps.setValue()
+        if is_over(clickerjitter.sliderrect, pygame.mouse.get_pos()) and tab == 1:
+            clickerjitter.setValue()
         elif is_over(redslider, pygame.mouse.get_pos()) and tab == 4:
             accent = ((pygame.mouse.get_pos()[0] - 50), accent[1], accent[2])
         elif pygame.mouse.get_pressed()[0] and is_over(greenslider, pygame.mouse.get_pos()) and tab == 4:
