@@ -192,6 +192,9 @@ while True:
         if is_over(velvertical.sliderrect, pygame.mouse.get_pos()) and tab == 3:
             velvertical.setValue()
 
+        if is_over(velchance.sliderrect, pygame.mouse.get_pos()) and tab == 3:
+            velchance.setValue()
+
         # Color sliders
 
         elif is_over(redslider, pygame.mouse.get_pos()) and tab == 4:
