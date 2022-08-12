@@ -88,10 +88,23 @@ clickerjitter.slidername = "Jitter:"
 clickerjitter.steps = 3
 clickerjitter.roundplaces = 1
 
+# Declare sliders for reach
+minreach = Slider()
+minreach.posx = 185
+minreach.steps = 7
+minreach.roundplaces = 1
+minreach.slidername = "Minimum Reach:"
+
+maxreach = Slider()
+maxreach.posx = 190
+maxreach.posy = 225
+maxreach.steps = 7
+maxreach.roundplaces = 1
+maxreach.slidername = "Maximum Reach:"
+
 # Declare sliders for velocity
 velhorizontal = Slider()
 velhorizontal.posx = 125
-velhorizontal.posy = 175
 velhorizontal.slidername = "Horizontal:"
 velhorizontal.steps = 100
 velhorizontal.roundplaces = 0
@@ -164,35 +177,50 @@ while True:
         mincps.renderSlider()
         maxcps.renderSlider()
         clickerjitter.renderSlider()
+
+    elif tab == 2:
+        minreach.renderSlider()
+        maxreach.renderSlider()
+
     elif tab == 3:
         velhorizontal.renderSlider()
         velvertical.renderSlider()
         velchance.renderSlider()
+
     elif tab == 4:
         screen.blit(guicolortext, (10, 125))
         rederRedSlider()
         renderGreenSlider()
         renderBlueSlider()
+
     if pygame.mouse.get_pressed()[0]:
         # Autoclicker sliders
         if is_over(mincps.sliderrect, pygame.mouse.get_pos()) and tab == 1:
             mincps.setValue()
 
-        if is_over(maxcps.sliderrect, pygame.mouse.get_pos()) and tab == 1:
+        elif is_over(maxcps.sliderrect, pygame.mouse.get_pos()) and tab == 1:
             maxcps.setValue()
 
-        if is_over(clickerjitter.sliderrect, pygame.mouse.get_pos()) and tab == 1:
+        elif is_over(clickerjitter.sliderrect, pygame.mouse.get_pos()) and tab == 1:
             clickerjitter.setValue()
+
+        # Reach sliders
+
+        if is_over(minreach.sliderrect, pygame.mouse.get_pos()) and tab == 2:
+            minreach.setValue()
+
+        if is_over(maxcps.sliderrect, pygame.mouse.get_pos()) and tab == 2:
+            maxreach.setValue()
 
         # Velocity sliders
 
-        if is_over(velhorizontal.sliderrect, pygame.mouse.get_pos()) and tab == 3:
+        elif is_over(velhorizontal.sliderrect, pygame.mouse.get_pos()) and tab == 3:
             velhorizontal.setValue()
 
-        if is_over(velvertical.sliderrect, pygame.mouse.get_pos()) and tab == 3:
+        elif is_over(velvertical.sliderrect, pygame.mouse.get_pos()) and tab == 3:
             velvertical.setValue()
 
-        if is_over(velchance.sliderrect, pygame.mouse.get_pos()) and tab == 3:
+        elif is_over(velchance.sliderrect, pygame.mouse.get_pos()) and tab == 3:
             velchance.setValue()
 
         # Color sliders
