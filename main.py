@@ -18,18 +18,19 @@ class Slider:
         self.slidername = "MinCPS:"
         self.value = 0.0
         self.roundplaces = 1
-
+        self.suffix = ""
+        self.sliderrect = screen.fill((30, 30, 46), (self.posx, self.posy, self.width + 1, 25))
     def renderSlider(self):
         self.sliderrect = screen.fill((30, 30, 46), (self.posx, self.posy, self.width + 1, 25))
         self.sliderrectrender = screen.fill((49, 50, 68), (self.posx, self.posy, self.width, 25))
         screen.fill(accent, (self.posx, self.posy, self.value / (self.steps / self.width), 25))
         slidernametext = font.render(self.slidername, True, (255, 255, 255))
         screen.blit(slidernametext, (10, self.posy))
-        numtext = font.render(str(self.value), True, (255, 255, 255))
+        numtext = font.render(str(self.value) + self.suffix, True, (255, 255, 255))
         screen.blit(numtext, ((self.posx + self.width) + 25, self.posy))
 
     def setValue(self):
-            self.value = round((pygame.mouse.get_pos()[0] - self.posx) * (self.steps / self.width), self.roundplaces)
+        self.value = round((pygame.mouse.get_pos()[0] - self.posx) * (self.steps / self.width), self.roundplaces)
 
 
 minecraft_running = os.popen('pgrep -a java | grep "minecraft"')
@@ -37,11 +38,10 @@ minecraft_running = os.popen('pgrep -a java | grep "minecraft"')
 if minecraft_running.read() == "":
     print("minecraft not running")
     minecraft_running.close()
-    pygame.quit()
-    exit()
+    # pygame.quit()
+    # exit()
 else:
     print("minecraft is running")
-
 
 minecraft_running.close()
 tab = 1
@@ -72,18 +72,51 @@ redslider = screen.fill((49, 50, 68), (50, 175, 256, 25))
 greenslider = screen.fill((49, 50, 68), (50, 225, 256, 25))
 blueslider = screen.fill((49, 50, 68), (50, 275, 256, 25))
 
+# Declare sliders for autoclicker
 mincps = Slider()
 mincps.posx = 100
+
 maxcps = Slider()
 maxcps.posx = 100
 maxcps.posy = 225
 maxcps.slidername = "MaxCPS:"
+
 clickerjitter = Slider()
 clickerjitter.posx = 100
 clickerjitter.posy = 275
 clickerjitter.slidername = "Jitter:"
 clickerjitter.steps = 3
 clickerjitter.roundplaces = 1
+
+# Declare sliders for velocity
+velhorizontal = Slider()
+velhorizontal.posx = 125
+velhorizontal.posy = 175
+velhorizontal.slidername = "Horizontal:"
+velhorizontal.steps = 100
+velhorizontal.roundplaces = 0
+velhorizontal.suffix = "%"
+velhorizontal.value = 100
+
+velvertical = Slider()
+velvertical.posx = 125
+velvertical.posy = 225
+velvertical.slidername = "Vertical:"
+velvertical.steps = 100
+velvertical.roundplaces = 0
+velvertical.suffix = "%"
+velvertical.value = 100
+
+velchance = Slider()
+velchance.posx = 125
+velchance.posy = 275
+velchance.slidername = "Chance:"
+velchance.steps = 100
+velchance.roundplaces = 0
+velchance.suffix = "%"
+velchance.value = 100
+
+
 def rederRedSlider():
     redslider = screen.fill((49, 50, 68), (50, 175, 255, 25))
     screen.fill((accent), (50, 175, accent[0], 25))
@@ -131,25 +164,45 @@ while True:
         mincps.renderSlider()
         maxcps.renderSlider()
         clickerjitter.renderSlider()
+    elif tab == 3:
+        velhorizontal.renderSlider()
+        velvertical.renderSlider()
+        velchance.renderSlider()
     elif tab == 4:
         screen.blit(guicolortext, (10, 125))
         rederRedSlider()
         renderGreenSlider()
         renderBlueSlider()
     if pygame.mouse.get_pressed()[0]:
+        # Autoclicker sliders
         if is_over(mincps.sliderrect, pygame.mouse.get_pos()) and tab == 1:
             mincps.setValue()
 
         if is_over(maxcps.sliderrect, pygame.mouse.get_pos()) and tab == 1:
             maxcps.setValue()
+
         if is_over(clickerjitter.sliderrect, pygame.mouse.get_pos()) and tab == 1:
             clickerjitter.setValue()
+
+        # Velocity sliders
+
+        if is_over(velhorizontal.sliderrect, pygame.mouse.get_pos()) and tab == 3:
+            velhorizontal.setValue()
+
+        if is_over(velvertical.sliderrect, pygame.mouse.get_pos()) and tab == 3:
+            velvertical.setValue()
+
+        # Color sliders
+
         elif is_over(redslider, pygame.mouse.get_pos()) and tab == 4:
             accent = ((pygame.mouse.get_pos()[0] - 50), accent[1], accent[2])
+
         elif pygame.mouse.get_pressed()[0] and is_over(greenslider, pygame.mouse.get_pos()) and tab == 4:
             accent = (accent[0], (pygame.mouse.get_pos()[0] - 50), accent[2])
+
         elif pygame.mouse.get_pressed()[0] and is_over(blueslider, pygame.mouse.get_pos()) and tab == 4:
             accent = (accent[0], accent[1], (pygame.mouse.get_pos()[0] - 50))
+
     pygame.display.update()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
