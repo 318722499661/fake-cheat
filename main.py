@@ -209,7 +209,7 @@ while True:
         if is_over(minreach.sliderrect, pygame.mouse.get_pos()) and tab == 2:
             minreach.setValue()
 
-        if is_over(maxcps.sliderrect, pygame.mouse.get_pos()) and tab == 2:
+        if is_over(maxreach.sliderrect, pygame.mouse.get_pos()) and tab == 2:
             maxreach.setValue()
 
         # Velocity sliders
