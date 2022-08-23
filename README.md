@@ -15,8 +15,7 @@ pip install pygame
 pip install pyinstaller
 python -m PyInstaller --icon=logo.ico --noconsole --onefile main.py
 ```
-then copy the fonts and images folders into the dist directory
-then you can run the file in the dist directory
+then copy the fonts and images folders into the dist directory and then you can run the file in the dist directory
 
 If you get an error that says you do not have pip refer to this: https://pip.pypa.io/en/stable/installation/
 # Screenshots
