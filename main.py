@@ -1,6 +1,6 @@
 import pygame
 import os
-
+from sys import exit
 pygame.init()
 
 
@@ -22,8 +22,10 @@ class Slider:
         self.sliderrect = screen.fill((30, 30, 46), (self.posx, self.posy, self.width + 1, 25))
     def renderSlider(self):
         self.sliderrect = screen.fill((30, 30, 46), (self.posx, self.posy, self.width + 1, 25))
-        self.sliderrectrender = screen.fill((49, 50, 68), (self.posx, self.posy, self.width, 25))
-        screen.fill(accent, (self.posx, self.posy, self.value / (self.steps / self.width), 25))
+        #self.sliderrectrender = screen.fill((49, 50, 68), (self.posx, self.posy, self.width, 25))
+        pygame.draw.rect(screen,(49, 50, 68), pygame.Rect(self.posx, self.posy, self.width, 25),border_radius = 3)
+        #screen.fill(accent, (self.posx, self.posy, self.value / (self.steps / self.width), 25))
+        pygame.draw.rect(screen, accent, pygame.Rect(self.posx, self.posy, self.value / (self.steps / self.width), 25), border_radius=3)
         slidernametext = font.render(self.slidername, True, (255, 255, 255))
         screen.blit(slidernametext, (10, self.posy))
         numtext = font.render(str(self.value) + self.suffix, True, (255, 255, 255))
