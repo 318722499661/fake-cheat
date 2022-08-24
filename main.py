@@ -38,9 +38,12 @@ class Slider:
         self.value = round((pygame.mouse.get_pos()[0] - self.posx) * (self.steps / self.width), self.roundplaces)
 
 
-minecraft_running = os.popen('pgrep -a java | grep "minecraft"')
+if os.name == "nt":
+    minecraft_running = os.popen('tasklist | FIND "javaw"')
+else:
+    minecraft_running = os.popen('pgrep -a java | grep "minecraft"')
 # comment out the lines that say "pygame.quit()" and "exit()" if you want it to run even if minecraft is not open
-if minecraft_running.read() == "" and os.name != "nt":
+if minecraft_running.read() == "":
     print("minecraft not running")
     minecraft_running.close()
     pygame.quit()

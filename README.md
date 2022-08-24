@@ -1,8 +1,13 @@
 # Fake cheat
 A fake ghost client. I dosen't do anything. Used to troll your freinds and tell them you are **HaCkInG** 
 
+## Not running
+This is because it will only open if minecraft is open
+
+## Having issues?
+File a bug report <a href="https://github.com/CloudyWhale/fake-cheat/issues">Here</a>
 ## Dependencies
-You will need the pygame python package for it to work
+You will need the pygame python package for it to run (unless you are using the exe)
 
 ## How to build
 Run these commands:
