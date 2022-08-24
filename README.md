@@ -5,7 +5,7 @@ A fake ghost client. I dosen't do anything. Used to troll your freinds and tell 
 This is because it will only open if minecraft is open
 
 ## Having issues?
-File a bug report <a href="https://github.com/CloudyWhale/fake-cheat/issues">Here</a>
+File a bug report <a href="https://github.com/CloudyWhale/fake-cheat/issues">here</a>
 ## Dependencies
 You will need the pygame python package for it to run (unless you are using the exe)
 
