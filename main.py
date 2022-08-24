@@ -1,6 +1,7 @@
 import pygame
 import os
 from sys import exit
+
 pygame.init()
 
 
@@ -20,12 +21,14 @@ class Slider:
         self.roundplaces = 1
         self.suffix = ""
         self.sliderrect = screen.fill((30, 30, 46), (self.posx, self.posy, self.width + 1, 25))
+
     def renderSlider(self):
         self.sliderrect = screen.fill((30, 30, 46), (self.posx, self.posy, self.width + 1, 25))
-        #self.sliderrectrender = screen.fill((49, 50, 68), (self.posx, self.posy, self.width, 25))
-        pygame.draw.rect(screen,(49, 50, 68), pygame.Rect(self.posx, self.posy, self.width, 25),border_radius = 3)
-        #screen.fill(accent, (self.posx, self.posy, self.value / (self.steps / self.width), 25))
-        pygame.draw.rect(screen, accent, pygame.Rect(self.posx, self.posy, self.value / (self.steps / self.width), 25), border_radius=3)
+        # self.sliderrectrender = screen.fill((49, 50, 68), (self.posx, self.posy, self.width, 25))
+        pygame.draw.rect(screen, (49, 50, 68), pygame.Rect(self.posx, self.posy, self.width, 25), border_radius=3)
+        # screen.fill(accent, (self.posx, self.posy, self.value / (self.steps / self.width), 25))
+        pygame.draw.rect(screen, accent, pygame.Rect(self.posx, self.posy, self.value / (self.steps / self.width), 25),
+                         border_radius=3)
         slidernametext = font.render(self.slidername, True, (255, 255, 255))
         screen.blit(slidernametext, (10, self.posy))
         numtext = font.render(str(self.value) + self.suffix, True, (255, 255, 255))
@@ -135,7 +138,7 @@ velchance.value = 100
 def rederRedSlider():
     redslider = screen.fill((30, 30, 46), (50, 175, 255, 25))
     pygame.draw.rect(screen, (49, 50, 68), pygame.Rect(50, 175, 255, 25), border_radius=3)
-    #screen.fill((accent), (50, 175, accent[0], 25))
+    # screen.fill((accent), (50, 175, accent[0], 25))
     pygame.draw.rect(screen, accent, pygame.Rect(50, 175, accent[0], 25), border_radius=3)
     screen.blit(redtext, (10, 175))
     rednumtext = font.render(str(accent[0]), True, (255, 255, 255))
@@ -145,7 +148,7 @@ def rederRedSlider():
 def renderGreenSlider():
     greenslider = screen.fill((30, 30, 46), (50, 225, 255, 25))
     pygame.draw.rect(screen, (49, 50, 68), pygame.Rect(50, 225, 255, 25), border_radius=3)
-    #screen.fill((accent), (50, 225, accent[1], 25))
+    # screen.fill((accent), (50, 225, accent[1], 25))
     pygame.draw.rect(screen, accent, pygame.Rect(50, 225, accent[1], 25), border_radius=3)
     screen.blit(greentext, (10, 225))
     greennumtext = font.render(str(accent[1]), True, (255, 255, 255))
@@ -155,7 +158,7 @@ def renderGreenSlider():
 def renderBlueSlider():
     blueslider = screen.fill((30, 30, 46), (50, 275, 255, 25))
     pygame.draw.rect(screen, (49, 50, 68), pygame.Rect(50, 275, 255, 25), border_radius=3)
-    #screen.fill((accent), (50, 275, accent[2], 25))
+    # screen.fill((accent), (50, 275, accent[2], 25))
     pygame.draw.rect(screen, accent, pygame.Rect(50, 275, accent[2], 25), border_radius=3)
     screen.blit(bluetext, (10, 275))
     bluenumtext = font.render(str(accent[2]), True, (255, 255, 255))
