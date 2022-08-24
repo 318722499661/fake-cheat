@@ -40,11 +40,11 @@ class Slider:
 
 minecraft_running = os.popen('pgrep -a java | grep "minecraft"')
 # comment out the lines that say "pygame.quit()" and "exit()" if you want it to run even if minecraft is not open
-if minecraft_running.read() == "":
+if minecraft_running.read() == "" and os.name != "nt":
     print("minecraft not running")
     minecraft_running.close()
-    # pygame.quit()
-    # exit()
+    pygame.quit()
+    exit()
 else:
     print("minecraft is running")
 
