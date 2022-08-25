@@ -66,6 +66,7 @@ Icon = pygame.image.load('images/logo.png')
 pygame.display.set_icon(Icon)
 (width, height) = (1000, 500)
 screen = pygame.display.set_mode((width, height), 0, 0, 0)
+gradient = pygame.image.load("images/gradient.png")
 font = pygame.font.Font('fonts/Poppins-Regular.ttf', 20)
 guicolortext = font.render("Accent color:", True, (255, 255, 255))
 redtext = font.render("R:", True, (255, 255, 255))
@@ -170,16 +171,17 @@ def renderBlueSlider():
 
 while True:
     screen.fill((30, 30, 46))
-    screen.fill((49, 50, 68), (0, 450, 1000, 50))
+    screen.fill((49, 50, 68), (0, 0, 50, 500))
+    screen.blit(gradient, (50, 0))
     if tab < 4:
-        screen.fill(accent, (((tab - 1) * 75), 0, ((tab - (tab - 1)) * 75), 85))
+        screen.fill(accent, (((tab - 1) * 75 + 50), 0, 75, 85))
     else:
-        screen.fill(accent, (46, 450, 45, 50))
-    mouseblit = screen.blit(pygame.transform.scale(mouse, (75, 75)), (0, 5))
-    targetblit = screen.blit(pygame.transform.scale(target, (75, 75)), (75, 5))
-    movementblit = screen.blit(pygame.transform.scale(movement, (75, 75)), (150, 5))
-    screen.blit(pygame.transform.scale(Icon, (33, 35)), (5, 457))
-    settingsblit = screen.blit(pygame.transform.scale(settings, (35, 35)), (50, 457))
+        screen.fill(accent, (0, 450, 50, 50))
+    mouseblit = screen.blit(pygame.transform.scale(mouse, (75, 75)), (50, 5))
+    targetblit = screen.blit(pygame.transform.scale(target, (75, 75)), (125, 5))
+    movementblit = screen.blit(pygame.transform.scale(movement, (75, 75)), (200, 5))
+    screen.blit(pygame.transform.scale(Icon, (33, 35)), (7, 457))
+    settingsblit = screen.blit(pygame.transform.scale(settings, (35, 35)), (7, 400))
     cheatnametext = font.render(cheatname, True, (255, 255, 255))
     screen.blit(cheatnametext, (10, 100))
     if tab < 4:
@@ -247,7 +249,6 @@ while True:
 
         elif pygame.mouse.get_pressed()[0] and is_over(blueslider, pygame.mouse.get_pos()) and tab == 4:
             accent = (accent[0], accent[1], (pygame.mouse.get_pos()[0] - 50))
-
     pygame.display.update()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
