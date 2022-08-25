@@ -176,7 +176,7 @@ while True:
     if tab < 4:
         screen.fill(accent, (((tab - 1) * 75 + 50), 0, 75, 85))
     else:
-        screen.fill(accent, (0, 450, 50, 50))
+        screen.fill(accent, (0, 393, 50, 50))
     mouseblit = screen.blit(pygame.transform.scale(mouse, (75, 75)), (50, 5))
     targetblit = screen.blit(pygame.transform.scale(target, (75, 75)), (125, 5))
     movementblit = screen.blit(pygame.transform.scale(movement, (75, 75)), (200, 5))
