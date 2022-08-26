@@ -30,7 +30,7 @@ class Slider:
         pygame.draw.rect(screen, accent, pygame.Rect(self.posx, self.posy, self.value / (self.steps / self.width), 25),
                          border_radius=3)
         slidernametext = font.render(self.slidername, True, (255, 255, 255))
-        screen.blit(slidernametext, (10, self.posy))
+        screen.blit(slidernametext, (60, self.posy))
         numtext = font.render(str(self.value) + self.suffix, True, (255, 255, 255))
         screen.blit(numtext, ((self.posx + self.width) + 25, self.posy))
 
@@ -66,6 +66,7 @@ Icon = pygame.image.load('images/logo.png')
 pygame.display.set_icon(Icon)
 (width, height) = (1000, 500)
 screen = pygame.display.set_mode((width, height), 0, 0, 0)
+gradient = pygame.image.load("images/gradient.png")
 font = pygame.font.Font('fonts/Poppins-Regular.ttf', 20)
 guicolortext = font.render("Accent color:", True, (255, 255, 255))
 redtext = font.render("R:", True, (255, 255, 255))
@@ -76,21 +77,21 @@ target = pygame.image.load('images/target.png')
 movement = pygame.image.load('images/running.png')
 settings = pygame.image.load('images/gear.png')
 pygame.display.flip()
-redslider = screen.fill((49, 50, 68), (50, 175, 256, 25))
-greenslider = screen.fill((49, 50, 68), (50, 225, 256, 25))
-blueslider = screen.fill((49, 50, 68), (50, 275, 256, 25))
+redslider = screen.fill((49, 50, 68), (100, 175, 256, 25))
+greenslider = screen.fill((49, 50, 68), (100, 225, 256, 25))
+blueslider = screen.fill((49, 50, 68), (100, 275, 256, 25))
 
 # Declare sliders for autoclicker
 mincps = Slider()
-mincps.posx = 100
+mincps.posx = 150
 
 maxcps = Slider()
-maxcps.posx = 100
+maxcps.posx = 150
 maxcps.posy = 225
 maxcps.slidername = "MaxCPS:"
 
 clickerjitter = Slider()
-clickerjitter.posx = 100
+clickerjitter.posx = 150
 clickerjitter.posy = 275
 clickerjitter.slidername = "Jitter:"
 clickerjitter.steps = 3
@@ -98,13 +99,13 @@ clickerjitter.roundplaces = 1
 
 # Declare sliders for reach
 minreach = Slider()
-minreach.posx = 185
+minreach.posx = 240
 minreach.steps = 7
 minreach.roundplaces = 1
 minreach.slidername = "Minimum Reach:"
 
 maxreach = Slider()
-maxreach.posx = 190
+maxreach.posx = 240
 maxreach.posy = 225
 maxreach.steps = 7
 maxreach.roundplaces = 1
@@ -112,7 +113,7 @@ maxreach.slidername = "Maximum Reach:"
 
 # Declare sliders for velocity
 velhorizontal = Slider()
-velhorizontal.posx = 125
+velhorizontal.posx = 175
 velhorizontal.slidername = "Horizontal:"
 velhorizontal.steps = 100
 velhorizontal.roundplaces = 0
@@ -120,7 +121,7 @@ velhorizontal.suffix = "%"
 velhorizontal.value = 100
 
 velvertical = Slider()
-velvertical.posx = 125
+velvertical.posx = 175
 velvertical.posy = 225
 velvertical.slidername = "Vertical:"
 velvertical.steps = 100
@@ -129,7 +130,7 @@ velvertical.suffix = "%"
 velvertical.value = 100
 
 velchance = Slider()
-velchance.posx = 125
+velchance.posx = 175
 velchance.posy = 275
 velchance.slidername = "Chance:"
 velchance.steps = 100
@@ -139,53 +140,51 @@ velchance.value = 100
 
 
 def rederRedSlider():
-    redslider = screen.fill((30, 30, 46), (50, 175, 255, 25))
-    pygame.draw.rect(screen, (49, 50, 68), pygame.Rect(50, 175, 255, 25), border_radius=3)
+    pygame.draw.rect(screen, (49, 50, 68), pygame.Rect(100, 175, 255, 25), border_radius=3)
     # screen.fill((accent), (50, 175, accent[0], 25))
-    pygame.draw.rect(screen, accent, pygame.Rect(50, 175, accent[0], 25), border_radius=3)
-    screen.blit(redtext, (10, 175))
+    pygame.draw.rect(screen, accent, pygame.Rect(100, 175, accent[0], 25), border_radius=3)
+    screen.blit(redtext, (60, 175))
     rednumtext = font.render(str(accent[0]), True, (255, 255, 255))
-    screen.blit(rednumtext, (325, 175))
+    screen.blit(rednumtext, (375, 175))
 
 
 def renderGreenSlider():
-    greenslider = screen.fill((30, 30, 46), (50, 225, 255, 25))
-    pygame.draw.rect(screen, (49, 50, 68), pygame.Rect(50, 225, 255, 25), border_radius=3)
+    pygame.draw.rect(screen, (49, 50, 68), pygame.Rect(100, 225, 255, 25), border_radius=3)
     # screen.fill((accent), (50, 225, accent[1], 25))
-    pygame.draw.rect(screen, accent, pygame.Rect(50, 225, accent[1], 25), border_radius=3)
-    screen.blit(greentext, (10, 225))
+    pygame.draw.rect(screen, accent, pygame.Rect(100, 225, accent[1], 25), border_radius=3)
+    screen.blit(greentext, (60, 225))
     greennumtext = font.render(str(accent[1]), True, (255, 255, 255))
-    screen.blit(greennumtext, (325, 225))
+    screen.blit(greennumtext, (375, 225))
 
 
 def renderBlueSlider():
-    blueslider = screen.fill((30, 30, 46), (50, 275, 255, 25))
-    pygame.draw.rect(screen, (49, 50, 68), pygame.Rect(50, 275, 255, 25), border_radius=3)
+    pygame.draw.rect(screen, (49, 50, 68), pygame.Rect(100, 275, 255, 25), border_radius=3)
     # screen.fill((accent), (50, 275, accent[2], 25))
-    pygame.draw.rect(screen, accent, pygame.Rect(50, 275, accent[2], 25), border_radius=3)
-    screen.blit(bluetext, (10, 275))
+    pygame.draw.rect(screen, accent, pygame.Rect(100, 275, accent[2], 25), border_radius=3)
+    screen.blit(bluetext, (60, 275))
     bluenumtext = font.render(str(accent[2]), True, (255, 255, 255))
-    screen.blit(bluenumtext, (325, 275))
+    screen.blit(bluenumtext, (375, 275))
 
 
 while True:
     screen.fill((30, 30, 46))
-    screen.fill((49, 50, 68), (0, 450, 1000, 50))
+    screen.fill((49, 50, 68), (0, 0, 50, 500))
+    screen.blit(gradient, (50, 0))
     if tab < 4:
-        screen.fill(accent, (((tab - 1) * 75), 0, ((tab - (tab - 1)) * 75), 85))
+        screen.fill(accent, (((tab - 1) * 75 + 50), 0, 75, 85))
     else:
-        screen.fill(accent, (46, 450, 45, 50))
-    mouseblit = screen.blit(pygame.transform.scale(mouse, (75, 75)), (0, 5))
-    targetblit = screen.blit(pygame.transform.scale(target, (75, 75)), (75, 5))
-    movementblit = screen.blit(pygame.transform.scale(movement, (75, 75)), (150, 5))
-    screen.blit(pygame.transform.scale(Icon, (33, 35)), (5, 457))
-    settingsblit = screen.blit(pygame.transform.scale(settings, (35, 35)), (50, 457))
+        screen.fill(accent, (0, 393, 50, 50))
+    mouseblit = screen.blit(pygame.transform.scale(mouse, (75, 75)), (50, 5))
+    targetblit = screen.blit(pygame.transform.scale(target, (75, 75)), (125, 5))
+    movementblit = screen.blit(pygame.transform.scale(movement, (75, 75)), (200, 5))
+    screen.blit(pygame.transform.scale(Icon, (33, 35)), (7, 457))
+    settingsblit = screen.blit(pygame.transform.scale(settings, (35, 35)), (7, 400))
     cheatnametext = font.render(cheatname, True, (255, 255, 255))
-    screen.blit(cheatnametext, (10, 100))
+    screen.blit(cheatnametext, (60, 100))
     if tab < 4:
         cheatsenabledtext = font.render("Enabled: " + str(cheatsenabled[cheatname.lower()]).lower(), True,
                                         (255, 255, 255))
-        cheatsenabledrect = screen.blit(cheatsenabledtext, (10, 125))
+        cheatsenabledrect = screen.blit(cheatsenabledtext, (60, 125))
 
     if tab == 1:
         mincps.renderSlider()
@@ -202,7 +201,7 @@ while True:
         velchance.renderSlider()
 
     elif tab == 4:
-        screen.blit(guicolortext, (10, 125))
+        screen.blit(guicolortext, (60, 125))
         rederRedSlider()
         renderGreenSlider()
         renderBlueSlider()
@@ -240,14 +239,13 @@ while True:
         # Color sliders
 
         elif is_over(redslider, pygame.mouse.get_pos()) and tab == 4:
-            accent = ((pygame.mouse.get_pos()[0] - 50), accent[1], accent[2])
+            accent = ((pygame.mouse.get_pos()[0] - 100), accent[1], accent[2])
 
         elif pygame.mouse.get_pressed()[0] and is_over(greenslider, pygame.mouse.get_pos()) and tab == 4:
-            accent = (accent[0], (pygame.mouse.get_pos()[0] - 50), accent[2])
+            accent = (accent[0], (pygame.mouse.get_pos()[0] - 100), accent[2])
 
         elif pygame.mouse.get_pressed()[0] and is_over(blueslider, pygame.mouse.get_pos()) and tab == 4:
-            accent = (accent[0], accent[1], (pygame.mouse.get_pos()[0] - 50))
-
+            accent = (accent[0], accent[1], (pygame.mouse.get_pos()[0] - 100))
     pygame.display.update()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
