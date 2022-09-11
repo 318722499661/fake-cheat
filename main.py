@@ -1,12 +1,24 @@
 import pygame
 import os
+import time
 from sys import exit
 
+overbar = False
 pygame.init()
-
+timeoverbar = 0
+barwidth = 50
+timeoffofbar = 0
 
 def is_over(rect, pos):
     return True if rect.collidepoint(pos[0], pos[1]) else False
+
+
+def easeInOutQuint(t, b, c, d):
+    t /= d / 2
+    if t < 1:
+        return c / 2 * t * t * t * t * t + b
+    t -= 2
+    return c / 2 * (t * t * t * t * t + 2) + b
 
 
 class Slider:
@@ -80,7 +92,6 @@ pygame.display.flip()
 redslider = screen.fill((49, 50, 68), (100, 175, 256, 25))
 greenslider = screen.fill((49, 50, 68), (100, 225, 256, 25))
 blueslider = screen.fill((49, 50, 68), (100, 275, 256, 25))
-
 # Declare sliders for autoclicker
 mincps = Slider()
 mincps.posx = 150
@@ -172,13 +183,9 @@ while True:
     screen.blit(gradient, (50, 0))
     if tab < 4:
         screen.fill(accent, (((tab - 1) * 75 + 50), 0, 75, 85))
-    else:
-        screen.fill(accent, (0, 393, 50, 50))
     mouseblit = screen.blit(pygame.transform.scale(mouse, (75, 75)), (50, 5))
     targetblit = screen.blit(pygame.transform.scale(target, (75, 75)), (125, 5))
     movementblit = screen.blit(pygame.transform.scale(movement, (75, 75)), (200, 5))
-    screen.blit(pygame.transform.scale(Icon, (33, 35)), (7, 457))
-    settingsblit = screen.blit(pygame.transform.scale(settings, (35, 35)), (7, 400))
     cheatnametext = font.render(cheatname, True, (255, 255, 255))
     screen.blit(cheatnametext, (60, 100))
     if tab < 4:
@@ -246,6 +253,25 @@ while True:
 
         elif pygame.mouse.get_pressed()[0] and is_over(blueslider, pygame.mouse.get_pos()) and tab == 4:
             accent = (accent[0], accent[1], (pygame.mouse.get_pos()[0] - 100))
+    leftbar = screen.fill((49, 50, 68), (0, 0, barwidth, 500))
+    if is_over(leftbar, pygame.mouse.get_pos()):
+        if overbar == False:
+            timeoverbar = time.time()
+        overbar = True
+        if time.time() - timeoverbar > 1 and barwidth < 201:
+            # barwidth+=1
+            barwidth = easeInOutQuint((time.time() - timeoverbar - 1), 50, 150, 0.5)
+    else:
+        if overbar:
+            timeoffofbar = time.time()
+        overbar = False
+        if barwidth > 50:
+            #barwidth -= 1
+            barwidth = easeInOutQuint((time.time() - timeoffofbar), 200, -150, 0.5)
+    if tab == 4:
+        screen.fill(accent, (0, 393, barwidth, 50))
+    screen.blit(pygame.transform.scale(Icon, (33, 35)), (7, 457))
+    settingsblit = screen.blit(pygame.transform.scale(settings, (35, 35)), (7, 400))
     pygame.display.update()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
