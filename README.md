@@ -20,5 +20,6 @@ then copy the fonts and images folders into the dist directory and then you can 
 
 If you get an error that says you do not have pip refer to this: https://pip.pypa.io/en/stable/installation/
 # Screenshots
-<img src="https://raw.githubusercontent.com/CloudyWhale/fake-cheat/master/screenshots/screenshot1.png" alt="screenshot 1">
+<img src="https://raw.githubusercontent.com/CloudyWhale/fake-cheat/master/screenshots/cleverclient1.png" alt="screenshot 1">
+<img src="https://raw.githubusercontent.com/CloudyWhale/fake-cheat/master/screenshots/cleverclient2.png" alt="screenshot 1">
 Video: https://streamable.com/ge639o
