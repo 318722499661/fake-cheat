@@ -72,7 +72,7 @@ cheatsenabled = {
     "reach": False,
     "velocity": False
 }
-accent = (255, 0, 77)
+accent = (0, 215, 135)
 pygame.display.set_caption('Clever Client')
 Icon = pygame.image.load('images/logo.png')
 pygame.display.set_icon(Icon)
@@ -256,7 +256,7 @@ while True:
             # barwidth+=1
             barwidth = math.floor(easeInOutQuint((time.time() - timeoverbar - 1), 50, 150, 0.5))
         if textalpha < 255 and time.time() - timeoverbar > 1:
-            textalpha+=1
+            textalpha+=0.75
     else:
         if overbar:
             timeoffofbar = time.time()
@@ -265,7 +265,7 @@ while True:
             #barwidth -= 1
             barwidth = math.floor(easeInOutQuint((time.time() - timeoffofbar), 200, -150, 0.5))
         if textalpha > 0:
-            textalpha-=1
+            textalpha-=0.75
     if tab == 4:
         screen.fill(accent, (0, 410, barwidth, 43))
     screen.blit(pygame.transform.scale(Icon, (33, 35)), (7, 457))
