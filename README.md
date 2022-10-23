@@ -1,3 +1,4 @@
+![](https://img.shields.io/github/issues/Garbg/fake-cheat) ![](https://img.shields.io/github/directory-file-count/Garbg/fake-cheat) ![](https://img.shields.io/github/license/Garbg/fake-cheat)
 # Fake cheat
 A fake ghost client. I dosen't do anything. Used to troll your freinds and tell them you are **HaCkInG** 
 
